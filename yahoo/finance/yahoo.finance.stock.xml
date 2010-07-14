@@ -197,7 +197,7 @@
         var results = componentsQuery.results;
 	    var indexes = <Indexes></Indexes>
 	    //var len = results.td.length()
-	    y.log("getComponentsInfo = " + results);
+	    y.log("getComponentsInfo = " + results.toString());
 /*	    for each (var td in results.td) {
 		    var iSymbol = a.@href.match(/=([^&]+)/)[1];
 		    iSymbol = iSymbol.replace(/%5E/gi, "^");
