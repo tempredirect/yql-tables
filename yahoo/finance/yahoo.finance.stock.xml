@@ -221,7 +221,7 @@
         "'",
 	{url:url});
 
-    var url = "http://finance.yahoo.com/q/pr?s=" + symbol + "+Components"
+    var url = "http://finance.yahoo.com/q/ct?s=" + symbol + "+Components"
     var componentsQuery = y.query(
 	"select * from html " +
 	"where url=@url and " + 
