@@ -195,6 +195,10 @@
 
     function getComponentsInfo(){
         var results = componentsQuery.results;
+        if( !results){
+            y.log("getComponentsInfo - no results");
+            return false;
+        }
 	    var indexes = <Indexes></Indexes>
 	    //var len = results.td.length()
 	    y.log("getComponentsInfo = " + results.toString());
@@ -202,9 +206,8 @@
 		    var iSymbol = a.@href.match(/=([^&]+)/)[1];
 		    iSymbol = iSymbol.replace(/%5E/gi, "^");
 		    indexes.node += <Index symbol={iSymbol}>{a.text()}</Index>;
-	    }
-	    if (indexes.length() > 0)
-	        stock.appendChild(indexes);        */
+	    }*/
+        stock.appendChild(indexes);
     }    
     
     // Queue the queries
