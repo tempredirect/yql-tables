@@ -170,17 +170,6 @@
 		.toString().slice(0, -1)
 		.replace(/\s+/g, "");
 	    switch (property.toLowerCase()) {
-	        case 'indexmembership':
-		    var indexes = <Indexes></Indexes>
-		    for each (var a in tr.td[1].a) {
-			var iSymbol = a.@href.match(/=([^&]+)/)[1];
-			iSymbol = iSymbol.replace(/%5E/gi, "^");
-			indexes.node += <Index symbol={iSymbol}>{a.text()}</Index>;
-		    }
-		    if (indexes.length() > 0)
-		        stock.appendChild(indexes);
-		    continue;
-		    break;
 		case 'fulltimeemployees':
 		    //Strip commas
 		    value = tr.td[1].*.text().toString().replace(/,/g, "");
@@ -204,6 +193,20 @@
 	return true;
     }
 
+    function getComponentsInfo(){
+        var results = componentsQuery.results;
+	    var indexes = <Indexes></Indexes>
+	    var len = results.length()
+	    y.log("getComponentsInfo = " + len);
+/*	    for each (var td in results.td) {
+		    var iSymbol = a.@href.match(/=([^&]+)/)[1];
+		    iSymbol = iSymbol.replace(/%5E/gi, "^");
+		    indexes.node += <Index symbol={iSymbol}>{a.text()}</Index>;
+	    }
+	    if (indexes.length() > 0)
+	        stock.appendChild(indexes);        */
+    }    
+    
     // Queue the queries
     var url = "http://finance.yahoo.com/q/pr?s="+symbol;
     var profileQuery = y.query(
@@ -212,6 +215,15 @@
 	"xpath='" +
         "//td[@class=\"yfnc_modtitlew2\"] | " +
         "//table[@class=\"yfnc_datamodoutline1\"]/tr/td/table/tr" +
+        "'",
+	{url:url});
+
+    var url = "http://finance.yahoo.com/q/pr?s=" + symbol + "+Components"
+    var componentsQuery = y.query(
+	"select * from html " +
+	"where url=@url and " + 
+	"xpath='" +
+        "//table[@class=\"yfnc_tableout1\"]//td[@class=\"yfnc_tabledata1\"]" +
         "'",
 	{url:url});
 
@@ -239,7 +251,8 @@
     getQuoteInfo();
     getHistoricalPrice();
     getProfileInfo();
-    
+    getComponentsInfo();
+        
     response.object = stock
 
 ]]></execute>
