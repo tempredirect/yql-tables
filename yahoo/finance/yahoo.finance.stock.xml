@@ -205,7 +205,7 @@
 	    for( i=0 ; i<len ; i+=4 ){
 	       var a = results.td[i].*.a ;
 	       var symbol = a.text();
-	       var desc = results.td[i+1].text()
+	       var desc = results.td[i+1].small.text()
 	       indexes.node += <Index symbol={symbol}>{desc}</Index>;
 	    }
 	    //y.log("getComponentsInfo = " + results.td.length());
